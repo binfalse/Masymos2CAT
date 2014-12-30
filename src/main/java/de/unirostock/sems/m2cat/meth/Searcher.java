@@ -160,7 +160,7 @@ curl -X POST \
 	public void parseSedmlResponse (Response res, GraphModelDocument doc)
 	{
 		JSONObject json = (JSONObject) JSONValue.parse(res.content);
-		//System.out.println (json);
+		//LOGGER.debug(json);
 		JSONArray rows = (JSONArray) json.get ("data");
 		
 		
@@ -186,7 +186,7 @@ curl -X POST \
 	public List<GraphModelDocument> parseSearchResponse (Response res)
 	{
 		JSONObject json = (JSONObject) JSONValue.parse(res.content);
-		//System.out.println (json);
+		//LOGGER.debug (json);
 		JSONArray rows = (JSONArray) json.get ("data");
 		
 		List<GraphModelDocument> docs = new ArrayList<GraphModelDocument> ();
@@ -279,13 +279,13 @@ curl -X POST \
     	{
     		s.findAssociatedSimulations (doc);
     		s.retrieveResources (doc);
-    		System.out.println (doc);
+    		LOGGER.debug (doc);
     		/*File f = File.createTempFile ("m2cat", "combineArchive", masymostest);
     		f.delete ();
     		try
 				{
 					doc.createCombineArchive (f);
-					System.out.println ("--- ca in " + f.getAbsolutePath ());
+					LOGGER.debug ("--- ca in " + f.getAbsolutePath ());
 				}
 				catch (Exception e)
 				{

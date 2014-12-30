@@ -44,6 +44,7 @@ import de.unirostock.sems.cbarchive.meta.omex.OmexDescription;
 import de.unirostock.sems.cbarchive.meta.omex.VCard;
 import de.unirostock.sems.cbext.Formatizer;
 import de.unirostock.sems.m2cat.meth.Resource;
+import de.unirostock.sems.m2cat.web.User;
 
 
 /**
@@ -200,7 +201,7 @@ public class GraphModelDocument extends GraphNode
 		{
 			String id = getFileName ();
 			id = id.substring (0, id.length () - 4);
-			System.out.println (id);
+			LOGGER.debug (id);
 			
 			File tmp = File.createTempFile ("m2cat", "temp");
 			//tmp.deleteOnExit ();
@@ -229,7 +230,6 @@ public class GraphModelDocument extends GraphNode
 						String url = matcher.group (1);
 						if (url.startsWith ("//"))
 							url = "http:" + url;
-						System.out.println (url);
 						LOGGER.debug ("downloading curation result from ", url);
 						FileRetriever.getFile (new URI (url), pic);
 						comments.add (0, matcher.group (2));
@@ -272,7 +272,7 @@ public class GraphModelDocument extends GraphNode
 		{
 			String id = getFileName ();
 			id = id.substring (0, id.length () - 4);
-			System.out.println (id);
+			LOGGER.debug (id);
 			
 			File tmp = File.createTempFile ("m2cat", "modelpic");
 			tmp.deleteOnExit ();
@@ -299,10 +299,10 @@ public class GraphModelDocument extends GraphNode
 	 * @throws CombineArchiveException the combine archive exception
 	 * @throws TransformerException 
 	 */
-	public void createCombineArchive (File f, String archiveName) throws IOException, JDOMException, ParseException, CombineArchiveException, TransformerException
+	public void createCombineArchive (File f, String archiveName, User user) throws IOException, JDOMException, ParseException, CombineArchiveException, TransformerException
 	{
 		List<VCard> creators = new ArrayList<VCard> ();
-		creators.add (new VCard ("Scharm", "Martin", "martin.scharm@uni-rostock.de", "University of Rostock")); 
+		creators.add (user.getVcard ()); 
 		OmexDescription omex = new OmexDescription (creators, new Date ());
 		
 		CombineArchive ca = new CombineArchive (f);

@@ -43,6 +43,20 @@ public class CookieManager
 	}
 	
 	/**
+	 * Gets the value of a cookie.
+	 *
+	 * @param name the name
+	 * @return the cookie value or null if there is no such cookie
+	 */
+	public String getCookieValue (String name)
+	{
+		Cookie c = cookies.get (name);
+		if (c != null)
+			return c.getValue ();
+		return null;
+	}
+	
+	/**
 	 * Gets the cookie.
 	 *
 	 * @param name the name

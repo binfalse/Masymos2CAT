@@ -26,12 +26,29 @@
 </head>
 <body>
 	<header>M2CAT</header>
+	
+	<form method="post">
+		First Name: <input type="text" name="firstname" value="${user.firstName}"/>
+		Last Name: <input type="text" name="lastname" value="${user.lastName}"/> <br/>
+		Mail: <input type="text" name="mail" value="${user.mail}"/> <br/>
+		Organization: <input type="text" name="org" value="${user.organization}" /> <br/>
+		<input type="submit" value="save" name="savemyinfo" />
+<c:choose>
+<c:when test="${user.valid}">
+<small>(valid)</small>
+</c:when>
+<c:otherwise>
+<small>(invalid)</small>
+</c:otherwise>
+</c:choose>
+	</form>
+	
 	<form method="post">
 		<input type="text" name="search" /> <input type="submit" name="submit" value="search"/>
 	</form>
 	
 	
-	<t:results docs="${docs}" base="${base}">
+	<t:results docs="${docs}" base="${base}" user="${user}">
 	
 	</t:results>
 	
