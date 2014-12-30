@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.unirostock.sems.m2cat;
+package de.unirostock.sems.m2cat.graph;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import org.json.simple.JSONObject;
 
 import de.binfalse.bfutils.FileRetriever;
+import de.unirostock.sems.m2cat.meth.Resource;
 
 
 /**

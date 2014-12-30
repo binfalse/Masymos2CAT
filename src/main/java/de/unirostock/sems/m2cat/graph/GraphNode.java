@@ -1,4 +1,4 @@
-package de.unirostock.sems.m2cat;
+package de.unirostock.sems.m2cat.graph;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import de.binfalse.bflog.LOGGER;
-import de.unirostock.sems.m2cat.GraphDbManager.Response;
+import de.unirostock.sems.m2cat.graph.GraphDbManager.Response;
 
 
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.unirostock.sems.m2cat;
+package de.unirostock.sems.m2cat.graph;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,6 +43,7 @@ import de.unirostock.sems.cbarchive.meta.OmexMetaDataObject;
 import de.unirostock.sems.cbarchive.meta.omex.OmexDescription;
 import de.unirostock.sems.cbarchive.meta.omex.VCard;
 import de.unirostock.sems.cbext.Formatizer;
+import de.unirostock.sems.m2cat.meth.Resource;
 
 
 /**

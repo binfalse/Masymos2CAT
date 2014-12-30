@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.unirostock.sems.m2cat;
+package de.unirostock.sems.m2cat.web;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -25,6 +25,8 @@ import com.thoughtworks.xstream.core.util.Fields;
 
 import de.binfalse.bflog.LOGGER;
 import de.binfalse.bfutils.FileRetriever;
+import de.unirostock.sems.m2cat.graph.GraphModelDocument;
+import de.unirostock.sems.m2cat.meth.Searcher;
 
 
 /**

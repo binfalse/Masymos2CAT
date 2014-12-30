@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.unirostock.sems.m2cat;
+package de.unirostock.sems.m2cat.graph;
 
 import org.json.simple.JSONObject;
 

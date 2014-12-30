@@ -1,4 +1,4 @@
-package de.unirostock.sems.m2cat;
+package de.unirostock.sems.m2cat.graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +18,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 
 import de.binfalse.bflog.LOGGER;
+import de.unirostock.sems.m2cat.Main;
 
 
 // TODO: Auto-generated Javadoc

@@ -12,6 +12,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.junit.Test;
 
+import de.unirostock.sems.m2cat.graph.GraphModelDocument;
+import de.unirostock.sems.m2cat.meth.Resource;
+
 /**
  * Unit test for simple App.
  */
