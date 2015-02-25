@@ -21,6 +21,6 @@ Following resources available:
 (<a href="http://webcat.sems.uni-rostock.de/rest/import?remote=${base}/file/archive/${doc.docId}&name=${doc.fileName}">open in CAT</a>)
 </c:when>
 <c:otherwise>
-<strong>to export the search results you need to provide some information about you at the top of the page.</strong>
+<strong>To export the search results you need to provide some information about yourself at the top of the page.</strong>
 </c:otherwise>
 </c:choose>
