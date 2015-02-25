@@ -30,6 +30,7 @@
 	</header>
 	<div id="meta">
 		<form method="post">
+			<strong>meta data about you</strong><br/>
 			First Name: <input type="text" name="firstname" value="${user.firstName}"/> <br/>
 			Last Name: <input type="text" name="lastname" value="${user.lastName}"/> <br/>
 			Mail: <input type="text" name="mail" value="${user.mail}"/> <br/>

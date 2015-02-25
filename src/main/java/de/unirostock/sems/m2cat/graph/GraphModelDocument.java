@@ -5,32 +5,21 @@ package de.unirostock.sems.m2cat.graph;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.transform.TransformerException;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.jdom2.JDOMException;
 import org.json.simple.JSONObject;
 
@@ -58,6 +47,7 @@ public class GraphModelDocument extends GraphNode
 	/** The model. */
 	private GraphModel model;
 	
+	/** The simulation description. */
 	private List<GraphSedmlDocument> simulationDescription;
 	
 	/** The resources. */
@@ -138,7 +128,7 @@ public class GraphModelDocument extends GraphNode
 	 * Retrieve model file.
 	 *
 	 * @throws IOException the IO exception
-	 * @throws URISyntaxException 
+	 * @throws URISyntaxException the uRI syntax exception
 	 */
 	public void retrieveModelFiles () throws IOException, URISyntaxException
 	{
@@ -168,9 +158,9 @@ public class GraphModelDocument extends GraphNode
 	 * Gets the additional resources.
 	 *
 	 * @return the additional resources
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 * @throws URISyntaxException 
+	 * @throws ClientProtocolException the client protocol exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
 	 */
 	public List<Resource> retrieveAdditionalResources () throws ClientProtocolException, IOException, URISyntaxException
 	{
@@ -191,9 +181,9 @@ public class GraphModelDocument extends GraphNode
 	 * Gets the reaction network.
 	 *
 	 * @param resources the resources
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 * @throws URISyntaxException 
+	 * @throws ClientProtocolException the client protocol exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
 	 */
 	public void getCurationResultPic (List<Resource> resources) throws ClientProtocolException, IOException, URISyntaxException
 	{
@@ -262,9 +252,9 @@ public class GraphModelDocument extends GraphNode
 	 * Gets the reaction network.
 	 *
 	 * @param resources the resources
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 * @throws URISyntaxException 
+	 * @throws ClientProtocolException the client protocol exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws URISyntaxException the uRI syntax exception
 	 */
 	public void getReactionNetworkPic (List<Resource> resources) throws ClientProtocolException, IOException, URISyntaxException
 	{
@@ -292,12 +282,13 @@ public class GraphModelDocument extends GraphNode
 	 * Creates an combine archive of this model.
 	 *
 	 * @param f the file to write to
-	 * @param archiveName 
+	 * @param archiveName the archive name
+	 * @param user the user
 	 * @throws IOException the IO exception
 	 * @throws JDOMException the JDOM exception
 	 * @throws ParseException the parse exception
 	 * @throws CombineArchiveException the combine archive exception
-	 * @throws TransformerException 
+	 * @throws TransformerException the transformer exception
 	 */
 	public void createCombineArchive (File f, String archiveName, User user) throws IOException, JDOMException, ParseException, CombineArchiveException, TransformerException
 	{
@@ -336,6 +327,7 @@ public class GraphModelDocument extends GraphNode
 		this.archiveName = archiveName;
 	}
 	
+	/** The archive name. */
 	private String archiveName;
 	
 	/**

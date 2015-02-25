@@ -23,6 +23,10 @@ h1,h2,h3
 	color: #fff;
 	padding: 20px;
 }
+footer
+{
+	font-size: .9em;
+}
 footer a, footer a:visited, footer a:active,footer a:hover
 {
 	color: #aaa;
@@ -35,4 +39,8 @@ footer a, footer a:visited, footer a:active,footer a:hover
 	padding: 20px;
 	marging: 10px;
 	background: #f2f2f2;
+}
+.resources
+{
+	margin-bottom: 15px;
 }

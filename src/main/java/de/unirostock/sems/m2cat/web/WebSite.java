@@ -8,7 +8,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.thoughtworks.xstream.core.util.Fields;
-
 import de.binfalse.bflog.LOGGER;
 import de.binfalse.bfutils.FileRetriever;
 import de.unirostock.sems.m2cat.graph.GraphModelDocument;
@@ -36,7 +34,17 @@ import de.unirostock.sems.m2cat.meth.Searcher;
  */
 public class WebSite extends HttpServlet
 {
+
+	private final String COOKIE_FIRSTNAME = "M2CATFN";
+	private final String COOKIE_LASTNAME = "M2CATLN";
+	private final String COOKIE_MAIL = "M2CATMAIL";
+	private final String COOKIE_ORG = "M2CATORG";
 	
+	/**
+	 * 
+	 */
+	private static final long	serialVersionUID	= 6349768181334656279L;
+
 	/** The storage. */
 	public static File STORAGE = new File ("/tmp/m2cat");
 	
@@ -112,10 +120,6 @@ public class WebSite extends HttpServlet
 		
 	}
 
-	private final String COOKIE_FIRSTNAME = "M2CATFN";
-	private final String COOKIE_LASTNAME = "M2CATLN";
-	private final String COOKIE_MAIL = "M2CATMAIL";
-	private final String COOKIE_ORG = "M2CATORG";
 	
 	private User loadUser (HttpServletRequest request, CookieManager cookies)
 	{
@@ -145,7 +149,7 @@ public class WebSite extends HttpServlet
 		CookieManager cookies = new CookieManager (request, response);
 		User user = loadUser (request, cookies);
 
-		String[] req =  request.getRequestURI().substring(request.getContextPath().length()).split ("/");
+		String[] req =  request.getRequestURI().substring(request.getContextPath().length()).split ("/", -1);
 		LOGGER.debug ("req: ", Arrays.toString (req));
 		
 		
@@ -162,14 +166,6 @@ public class WebSite extends HttpServlet
 					request.setAttribute ("docs", docs);
 				LOGGER.info ("found ", docs.size (), " docs for ", search);
 				
-				/*for (GraphModelDocument doc : docs)
-				{
-					String name = UUID.randomUUID ().toString ();
-					while (new File (STORAGE + File.separator + name).exists ())
-						name = UUID.randomUUID ().toString ();
-					doc.createCombineArchive (new File (STORAGE + File.separator + name), name);
-				}*/
-				
 			}
 			catch (Exception e)
 			{
@@ -177,11 +173,24 @@ public class WebSite extends HttpServlet
 			}
 		}
 		
-		if (req.length > 2 && req[1].equals ("file") && user.isValid ())
+		if (req.length > 2 && req[1].equals ("file"))
 		{
 			String name = req[2];
+			
 			if (name.equals ("archive") && req.length > 3)
 			{
+				
+				if (req.length > 4)
+				{
+					user = User.getUserFromUrl (req[4]);
+				}
+				else
+				{
+					LOGGER.error ("invalid request: ", req.length);
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					return;
+				}
+				
 				// generate archive
 				Searcher s = new Searcher ();
 				List<GraphModelDocument> docs;
@@ -192,6 +201,8 @@ public class WebSite extends HttpServlet
 					if (docs != null)
 						request.setAttribute ("docs", docs);
 					LOGGER.info ("found ", docs.size (), " docs for ", search);
+					
+					
 					
 					for (GraphModelDocument doc : docs)
 					{
@@ -222,7 +233,7 @@ public class WebSite extends HttpServlet
 			
 		
 		request.setAttribute ("ContextPath", request.getContextPath ());
-		request.setAttribute ("User", user);
+		request.setAttribute ("user", user);
 		request.setAttribute ("base", BASE_URL);
 		request.getRequestDispatcher ("/WEB-INF/Index.jsp").forward (request, response);
 	}
