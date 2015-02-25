@@ -3,9 +3,6 @@
  */
 package de.unirostock.sems.m2cat.web;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import de.binfalse.bfutils.GeneralTools;
 import de.unirostock.sems.cbarchive.meta.omex.VCard;
 

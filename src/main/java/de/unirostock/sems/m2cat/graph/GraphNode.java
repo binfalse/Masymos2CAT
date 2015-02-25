@@ -6,7 +6,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import de.binfalse.bflog.LOGGER;
 import de.unirostock.sems.m2cat.graph.GraphDbManager.Response;
 
 

@@ -3,24 +3,21 @@ package de.unirostock.sems.m2cat.meth;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
-import org.jdom2.JDOMException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import de.binfalse.bflog.LOGGER;
-import de.unirostock.sems.cbarchive.CombineArchiveException;
 import de.unirostock.sems.m2cat.graph.GraphDbManager;
+import de.unirostock.sems.m2cat.graph.GraphDbManager.Response;
 import de.unirostock.sems.m2cat.graph.GraphModel;
 import de.unirostock.sems.m2cat.graph.GraphModelDocument;
 import de.unirostock.sems.m2cat.graph.GraphSedml;
 import de.unirostock.sems.m2cat.graph.GraphSedmlDocument;
-import de.unirostock.sems.m2cat.graph.GraphDbManager.Response;
 
 /**
  * Hello world!

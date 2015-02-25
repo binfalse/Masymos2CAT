@@ -201,6 +201,7 @@ public class GraphModelDocument extends GraphNode
 			LOGGER.debug ("downloading curation result page from ", remoteUrl);
 			FileRetriever.getFile (new URI (remoteUrl), tmp);
 			
+			
 			// read the file
 			BufferedReader br = new BufferedReader (new FileReader (tmp));
 			File pic = File.createTempFile ("m2cat", "curationResult");
