@@ -152,6 +152,7 @@ public class WebSite extends HttpServlet
 		String search = request.getParameter ("search");
 		if (search != null && search.length () > 0)
 		{
+			request.setAttribute ("searchTerm", search);
 			Searcher s = new Searcher ();
 			List<GraphModelDocument> docs;
 			try

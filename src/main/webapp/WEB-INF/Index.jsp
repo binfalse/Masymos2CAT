@@ -25,10 +25,12 @@
 	<link rel="stylesheet" href="res/style.css" type="text/css" />
 </head>
 <body>
-	<header>M2CAT</header>
+	<header>
+		<h1>M2CAT &mdash; From Masymos To CAT</h1>
+	</header>
 	<div id="meta">
 		<form method="post">
-			First Name: <input type="text" name="firstname" value="${user.firstName}"/>
+			First Name: <input type="text" name="firstname" value="${user.firstName}"/> <br/>
 			Last Name: <input type="text" name="lastname" value="${user.lastName}"/> <br/>
 			Mail: <input type="text" name="mail" value="${user.mail}"/> <br/>
 			Organization: <input type="text" name="org" value="${user.organization}" /> <br/>
@@ -44,18 +46,28 @@
 		</form>
 	</div>
 	
-	<form method="post">
-		<input type="text" name="search" /> <input type="submit" name="submit" value="search"/>
-	</form>
+	<div id="abstract">
+		<a href="https://sems.uni-rostock.de/projects/m2cat/">M2CAT</a> is a web based tool to export reproducible research results.
+		It links the graph based database <a href="https://sems.uni-rostock.de/projects/masymos/">MASYMOS</a> to the <a href="https://sems.uni-rostock.de/projects/combinearchive/">CombineArchiveToolkit</a> (CAT).
+	</div>
+	
+	<div id="search">
+		<form method="post">
+			Search for models and resources in the database:<br/>
+			<input type="text" name="search" /> <input type="submit" name="submit" value="search"/>
+		</form>
+	</div>
 	
 	
-	<t:results docs="${docs}" base="${base}" user="${user}">
-	
-	</t:results>
+	<div id="results">
+		<t:results docs="${docs}" base="${base}" user="${user}" searchTerm="${searchTerm}">
+		
+		</t:results>
+	</div>
 	
 	<footer>
 		built by <a href="http://sems.uni-rostock.de/" title="Simulation Experiment Management for Systems Biology">SEMS</a> @ <a href="http://www.uni-rostock.de/" title="University of Rostock">University of Rostock</a>
-		&nbsp;|&nbsp;<a id="about-footer-link" href="#" title="About page">About</a>
+		&nbsp;
 	</footer>
 </body>
 </html>

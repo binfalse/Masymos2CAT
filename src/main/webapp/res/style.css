@@ -1,0 +1,38 @@
+body
+{
+	font-family: "Open Sans",Helvetica,Arial,sans-serif;
+}
+
+h1,h2,h3
+{
+	color: #004A99;
+}
+#search
+{
+	padding: 20px;
+	
+}
+#meta
+{
+	float: right;
+	text-align: right;
+}
+#meta, footer
+{
+	background: #004A99;
+	color: #fff;
+	padding: 20px;
+}
+footer a, footer a:visited, footer a:active,footer a:hover
+{
+	color: #aaa;
+}
+#abstract
+{
+	font-size: .9em;
+	color: #666;
+	max-width: 550px;
+	padding: 20px;
+	marging: 10px;
+	background: #f2f2f2;
+}
