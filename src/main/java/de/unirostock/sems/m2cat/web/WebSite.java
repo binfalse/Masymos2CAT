@@ -170,6 +170,7 @@ public class WebSite extends HttpServlet
 			{
 				LOGGER.error (e, "couldn't search for", search);
 			}
+			request.setAttribute ("dbErr", s.hasDbErr ());
 		}
 		
 		if (req.length > 2 && req[1].equals ("file"))

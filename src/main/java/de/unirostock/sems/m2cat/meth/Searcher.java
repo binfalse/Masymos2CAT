@@ -26,6 +26,26 @@ import de.unirostock.sems.m2cat.graph.GraphSedmlDocument;
 public class Searcher 
 {
 	
+	private boolean dbErr;
+	
+	/**
+	 * Instantiates a new searcher.
+	 */
+	public Searcher ()
+	{
+		dbErr = false;
+	}
+	
+	/**
+	 * Checks for a DB err.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean hasDbErr ()
+	{
+		return dbErr;
+	}
+	
 	/**
 	 * @param search
 	 * @return list of found docs
@@ -63,7 +83,8 @@ curl -X POST \
 		else
 		{
 			LOGGER.error ("couldn't find documents");
-			return null;
+			dbErr = true;
+			return new ArrayList<GraphModelDocument> ();
 		}
 	}
 
@@ -91,7 +112,8 @@ curl -X POST \
 		else
 		{
 			LOGGER.error ("couldn't find documents");
-			return null;
+			dbErr = true;
+			return new ArrayList<GraphModelDocument> ();
 		}
 	}
 
@@ -116,7 +138,8 @@ curl -X POST \
 		else
 		{
 			LOGGER.error ("couldn't find documents");
-			return null;
+			dbErr = true;
+			return new ArrayList<GraphModelDocument> ();
 		}
 	}
 	
@@ -144,7 +167,10 @@ curl -X POST \
 		if (res.status == 200)
 			parseSedmlResponse (res, doc);
 		else
+		{
 			LOGGER.error ("couldn't find sedml descriptions");
+			dbErr = true;
+		}
 	}
 	
 	

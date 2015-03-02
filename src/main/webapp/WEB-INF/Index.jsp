@@ -59,6 +59,11 @@
 		</form>
 	</div>
 	
+	<c:if test="${dbErr}">
+		<div id="dbErr">
+			Apparently, we ran into an error with the DB connection!? Is the database running?
+		</div>
+	</c:if>
 	
 	<div id="results">
 		<t:results docs="${docs}" base="${base}" user="${user}" searchTerm="${searchTerm}">

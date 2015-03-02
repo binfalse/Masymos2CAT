@@ -44,3 +44,11 @@ footer a, footer a:visited, footer a:active,footer a:hover
 {
 	margin-bottom: 15px;
 }
+#dbErr
+{
+	color: #c00;
+	padding: 20px;
+	marging: 10px;
+	background: #fee;
+	font-weight: bold;
+}
