@@ -16,6 +16,7 @@
 		<servlet-name>Index</servlet-name>
 		<url-pattern>/index.sems</url-pattern>
 		<url-pattern>/file/*</url-pattern>
+		<url-pattern>/webcat/*</url-pattern>
 	</servlet-mapping>
 	
 

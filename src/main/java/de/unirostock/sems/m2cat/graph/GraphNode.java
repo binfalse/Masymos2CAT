@@ -173,4 +173,19 @@ public abstract class GraphNode
 		JSONArray labels = (JSONArray) json.get ("data");
 		return labels;
 	}
+	
+	
+	
+	/**
+	 * Gets the file uri.
+	 *
+	 * @return the file uri
+	 */
+	public String getFileUri ()
+	{
+		Object o = data.get ("URI");
+		if (o != null)
+			return o.toString ();
+		return null;
+	}
 }

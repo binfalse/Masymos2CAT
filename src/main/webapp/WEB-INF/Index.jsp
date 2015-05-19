@@ -23,6 +23,7 @@
 <head>
 	<title>M2CAT</title>
 	<link rel="stylesheet" href="res/style.css" type="text/css" />
+	<script src="res/jquery-2.1.3.min.js"></script>
 </head>
 <body>
 	<header>

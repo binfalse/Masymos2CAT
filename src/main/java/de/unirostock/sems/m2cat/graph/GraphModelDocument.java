@@ -53,6 +53,8 @@ public class GraphModelDocument extends GraphNode
 	/** The resources. */
 	private List<Resource> resources;
 	
+	private boolean isCellML;
+	
 	/**
 	 * The Constructor.
 	 *
@@ -98,12 +100,13 @@ public class GraphModelDocument extends GraphNode
 		return model;
 	}
 	
+	
 	/**
-	 * Gets the file name.
+	 * Gets the URI to the document.
 	 *
-	 * @return the file name
+	 * @return the URI
 	 */
-	public String getFileName ()
+	public String getDocUri ()
 	{
 		Object o = data.get ("FILENAME");
 		if (o != null)
@@ -112,13 +115,13 @@ public class GraphModelDocument extends GraphNode
 	}
 	
 	/**
-	 * Gets the file uri.
+	 * Gets the file name.
 	 *
-	 * @return the file uri
+	 * @return the file name
 	 */
-	public String getFileUri ()
+	public String getFileName ()
 	{
-		Object o = data.get ("URI");
+		Object o = data.get ("FILENAME");
 		if (o != null)
 			return o.toString ();
 		return null;
@@ -153,6 +156,37 @@ public class GraphModelDocument extends GraphNode
 	}
 	
 	
+	/**
+	 * Checks if is cell ml.
+	 *
+	 * @return true, if checks if is cell ml
+	 */
+	public boolean isCellML ()
+	{
+		return isCellML;
+	}
+	
+	
+	/**
+	 * Checks if is simulation description.
+	 *
+	 * @return true, if checks if is simulation description
+	 */
+	public boolean isSimulationDescription ()
+	{
+		return simulationDescription.size () > 0;
+	}
+	
+	/**
+	 * Gets the first simulation description.
+	 *
+	 * @return the first simulation description
+	 */
+	public GraphSedmlDocument getFirstSimulationDescription ()
+	{
+		return simulationDescription.get (0);
+	}
+	
 	
 	/**
 	 * Gets the additional resources.
@@ -168,6 +202,9 @@ public class GraphModelDocument extends GraphNode
 		// -> download sbgn img and curation stuff from biomodels
 		getReactionNetworkPic (resources);
 		getCurationResultPic (resources);
+		
+		if (getFileName ().matches (".*.cellml"))
+			isCellML = true;
 		
 		// TODO: URI matches http://models.cellml.org/
 		// -> find repo name. tell the user. clone all from cellml

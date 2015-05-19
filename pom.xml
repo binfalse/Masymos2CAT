@@ -3,7 +3,7 @@
 
   <groupId>de.unirostock.sems</groupId>
   <artifactId>Masymos2CAT</artifactId>
-  <version>0.2.1</version>
+  <version>0.2.2</version>
   <packaging>war</packaging>
 
   <name>Masymos2CAT</name>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>de.binfalse</groupId>
             <artifactId>BFUtils</artifactId>
-            <version>0.3.10</version>
+            <version>0.4.1</version>
         </dependency>
 		<dependency>
 			<groupId>de.unirostock.sems</groupId>

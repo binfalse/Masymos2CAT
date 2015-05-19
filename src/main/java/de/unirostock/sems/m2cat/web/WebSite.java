@@ -5,9 +5,12 @@ package de.unirostock.sems.m2cat.web;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +23,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import de.binfalse.bflog.LOGGER;
 import de.binfalse.bfutils.FileRetriever;
@@ -173,7 +187,98 @@ public class WebSite extends HttpServlet
 			request.setAttribute ("dbErr", s.hasDbErr ());
 		}
 		
-		if (req.length > 2 && req[1].equals ("file"))
+		int idx = 1;
+		if (req.length > 2 && req[1].length () == 0)
+			idx ++;
+		if (req.length > idx + 1 && req[idx].equals ("webcat"))
+		{
+			LOGGER.info ("webcat request");
+			Searcher s = new Searcher ();
+			List<GraphModelDocument> docs;
+			try
+			{
+				LOGGER.debug ("searching model id ", req[idx + 1]);
+				docs = s.searchForId (Integer.parseInt (req[idx + 1]));
+
+				if (docs == null || docs.size () < 1)
+					return;
+				GraphModelDocument doc = docs.get (0);
+				
+				JSONObject json = new JSONObject ();
+				
+				json.put ("archiveName", doc.getFileName ());
+				json.put ("type", doc.isCellML () ? "git" : "http");
+				json.put ("remoteUrl", doc.isCellML () ? doc.getFileUri () : request.getParameter ("archiveUri"));
+				
+				json.put ("ownVCard", true);
+				JSONObject vcard = new JSONObject ();
+				vcard.put ("familyName", user.getLastName ());
+				vcard.put ("givenName", user.getLastName ());
+				vcard.put ("email", user.getMail ());
+				vcard.put ("organization", user.getOrganization ());
+
+				json.put ("vcard", vcard);
+				
+				
+				if (doc.isCellML () && doc.isSimulationDescription ())
+				{
+					JSONArray arr = new JSONArray ();
+					JSONObject add = new JSONObject ();
+					add.put ("remoteUrl",  doc.getFirstSimulationDescription ().getFileUri ());
+					add.put ("archivePath", doc.getFirstSimulationDescription ().getFileName ());
+					arr.add (add);
+					json.put ("additionalFiles", arr);
+				}
+				
+				
+				HttpPost httppost = new HttpPost("http://webcat.sems.uni-rostock.de/rest/import");
+				/*List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+				params.add(new BasicNameValuePair("param-1", "12345"));
+				params.add(new BasicNameValuePair("param-2", "Hello!"));*/
+				
+				StringEntity entity = new StringEntity(json.toJSONString (), "UTF-8");
+				
+				LOGGER.debug ("sending to: http://webcat.sems.uni-rostock.de/rest/import", json.toJSONString ());
+				
+				entity.setContentType("application/json");
+				httppost.setEntity(entity);
+				
+				//Execute and get the response.
+				HttpClient httpclient = HttpClients.createDefault();
+				
+        HttpContext context = new BasicHttpContext();
+				HttpResponse resp = httpclient.execute(httppost, context);
+				int fwd = resp.getStatusLine().getStatusCode ();
+				LOGGER.info ("response from webcat: ", resp.getStatusLine().toString ());
+				if (fwd == 301 || fwd == 302)
+				{
+					String cookie = resp.getLastHeader ("Set-Cookie").getValue ();
+					cookie = cookie.replace (".*combinearchiveweba=", "").replace ("combinearchiveweba=", "").replaceAll (";.*", "");
+					
+					String location = resp.getLastHeader ("Location").getValue();
+					location = location.replaceAll (".*#", "#");
+					
+					String fin = "http://webcat.sems.uni-rostock.de/cat/rest/share/" + cookie + "/" + location;
+					
+					response.setStatus (HttpServletResponse.SC_FOUND);
+					response.setHeader( "Location", fin );
+					
+					PrintWriter out = response.getWriter ();
+					out.write ("If you're not automatically redirected please go to <a href='" + fin + "'>" + fin + "</a>.");
+					out.flush ();
+					LOGGER.debug ("done getting webcat communication returning: ", fin);
+					return;
+				}
+
+				LOGGER.error ("didn't get a redirect from webcat");
+			}
+			catch (Exception e)
+			{
+				LOGGER.error (e, "couldn't search for", search);
+			}
+		}
+		
+		else if (req.length > 2 && req[1].equals ("file"))
 		{
 			String name = req[2];
 			
