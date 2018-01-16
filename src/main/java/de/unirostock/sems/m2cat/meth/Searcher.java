@@ -47,9 +47,11 @@ public class Searcher
 	}
 	
 	/**
-	 * @param search
+	 * Search for annotation.
+	 *
+	 * @param search the search
 	 * @return list of found docs
-	 * @throws IOException
+	 * @throws IOException the IO exception
 	 */
 	public List<GraphModelDocument> searchForAnnotation (String search) throws IOException
 	{
@@ -92,7 +94,7 @@ curl -X POST \
 	 * Search for author.
 	 *
 	 * @param search the search
-	 * @return the list< graph model document>
+	 * @return the list of graph model documents
 	 * @throws IOException the IO exception
 	 */
 	public List<GraphModelDocument> searchForAuthor (String search) throws IOException
@@ -118,9 +120,11 @@ curl -X POST \
 	}
 
 	/**
-	 * @param id
+	 * Search for model id.
+	 *
+	 * @param id the id
 	 * @return list of found docs
-	 * @throws IOException
+	 * @throws IOException the IO exception
 	 */
 	public List<GraphModelDocument> searchForModelId (int id) throws IOException
 	{
@@ -149,7 +153,7 @@ curl -X POST \
 	 * Find associated simulations.
 	 *
 	 * @param doc the doc
-	 * @throws IOException 
+	 * @throws IOException the IO exception
 	 */
 	public void findAssociatedSimulations (GraphModelDocument doc) throws IOException
 	{
@@ -178,7 +182,7 @@ curl -X POST \
 	 * Parses the search response.
 	 *
 	 * @param res the res
-	 * @param doc 
+	 * @param doc the doc
 	 */
 	public void parseSedmlResponse (Response res, GraphModelDocument doc)
 	{
@@ -204,7 +208,7 @@ curl -X POST \
 	 * Parses the search response.
 	 *
 	 * @param res the res
-	 * @return the list< graph document>
+	 * @return the list of graph documents
 	 */
 	public List<GraphModelDocument> parseSearchResponse (Response res)
 	{
@@ -229,9 +233,9 @@ curl -X POST \
 	 * Gets the further resources.
 	 *
 	 * @param doc the doc
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 * @throws URISyntaxException 
+	 * @throws ClientProtocolException the client protocol exception
+	 * @throws IOException the IO exception
+	 * @throws URISyntaxException the URI syntax exception
 	 */
 	public void retrieveResources (GraphModelDocument doc) throws ClientProtocolException, IOException, URISyntaxException
 	{
@@ -244,7 +248,7 @@ curl -X POST \
 	 * Search.
 	 *
 	 * @param term the term
-	 * @return the list< graph model document>
+	 * @return the list of graph model documents
 	 * @throws ClientProtocolException the client protocol exception
 	 * @throws IOException the IO exception
 	 * @throws URISyntaxException the URI syntax exception
@@ -266,7 +270,7 @@ curl -X POST \
 	 * Search.
 	 *
 	 * @param term the term
-	 * @return the list< graph model document>
+	 * @return the list of graph model documents
 	 * @throws ClientProtocolException the client protocol exception
 	 * @throws IOException the IO exception
 	 * @throws URISyntaxException the URI syntax exception
@@ -284,9 +288,11 @@ curl -X POST \
 	}
 	
     /**
-     * @param args
-     * @throws IOException 
-     * @throws URISyntaxException 
+     * The main method.
+     *
+     * @param args the args
+     * @throws IOException the IO exception
+     * @throws URISyntaxException the URI syntax exception
      */
     public static void main( String[] args ) throws IOException, URISyntaxException
     {

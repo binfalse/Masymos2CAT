@@ -12,8 +12,11 @@ import org.json.simple.JSONObject;
  */
 public class GraphModel extends GraphNode
 {
+	
 	/**
-	 * @param data
+	 * The Constructor.
+	 *
+	 * @param data the data
 	 */
 	public GraphModel (JSONObject data)
 	{

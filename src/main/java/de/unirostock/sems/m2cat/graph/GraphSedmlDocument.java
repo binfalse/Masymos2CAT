@@ -85,10 +85,10 @@ public class GraphSedmlDocument extends GraphNode
 	
 	/**
 	 * Retrieve sedml file.
-	 * 
+	 *
 	 * @return the sedml file as resource
 	 * @throws IOException the IO exception
-	 * @throws URISyntaxException 
+	 * @throws URISyntaxException the URI syntax exception
 	 */
 	public Resource retrieveModelFiles () throws IOException, URISyntaxException
 	{

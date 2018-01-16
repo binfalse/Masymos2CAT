@@ -12,8 +12,11 @@ import org.json.simple.JSONObject;
  */
 public class GraphSedml extends GraphNode
 {
+	
 	/**
-	 * @param data
+	 * The Constructor.
+	 *
+	 * @param data the data
 	 */
 	public GraphSedml (JSONObject data)
 	{

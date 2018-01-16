@@ -16,7 +16,9 @@ public class Main
 	public static final String NL = System.getProperty("line.separator");
 	
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the args
 	 */
 	public static void main (String[] args)
 	{
