@@ -3,7 +3,7 @@
 
   <groupId>de.uni-rostock.sbi</groupId>
   <artifactId>Masymos2CAT</artifactId>
-  <version>0.2.4</version>
+  <version>0.2.5</version>
   <packaging>war</packaging>
 
 	<name>Masymos2CAT</name>
@@ -92,12 +92,12 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3</version>
+			<version>[4.3.6,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
-			<version>4.3</version>
+			<version>[4.3.6,)</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
